@@ -1,0 +1,57 @@
+<div class="container main-container">
+  <h1>Canal de Youtube</h1>
+  <hr>
+
+
+  <div class="card-columns" *ngIf="videos.length > 0">
+    <div class="card animated fadeIn fast" *ngFor="let video of videos">
+      <img class="card-img-top img-fluid" 
+          [src]="video.thumbnails.high.url" 
+          [alt]="video.title">
+      <div class="card-body">
+        <h5 class="card-title">{{video.title}}</h5>
+        <button (click)="verVideo(video)"
+          type="button" class="btn btn-outline-primary btn-block">
+            Ver vídeo
+        </button>
+        <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+      </div>
+    </div>
+  </div>
+
+  <button 
+    (click)="cargarMas()"
+    type="button" class="btn btn-outline-primary btn-block">
+      Cargar mas vídeos
+  </button>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" 
+      id="myModal" 
+      tabindex="-1" 
+      role="dialog" 
+      aria-labelledby="exampleModalLabel" 
+      aria-hidden="true" 
+      data-backdrop="static"
+      data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="videoSeleccionado">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{videoSeleccionado?.title}}</h5>
+      </div>
+      <div class="modal-body">
+        <iframe width="100%" height="300px" [src]="videoSeleccionado.resourceId.videoId | videoYoutube" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="modal-footer">
+        <button 
+          type="button" 
+          class="btn btn-secondary" 
+          (click)="cerrarModal()">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
